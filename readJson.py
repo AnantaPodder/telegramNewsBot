@@ -1,32 +1,25 @@
+##### IMPORTS #####
 import requests
 from datetime import datetime
 import pytz
 
-api = "9b34898258214cc7be306cabdfbed128"
-keyword = "tesla"
 
-IST = pytz.timezone("Asia/Kolkata")
-
-raw_TS = datetime.now(IST)
-today = raw_TS.strftime("%Y-%m-%d")
+###### CONSTANTS ######
+news_api = "9b34898258214cc7be306cabdfbed128"
+news_keyword = "india"
 country_code = "in"
+telegram_group = "testananta"
+telegram_api = "5230528864:AAE0oT9CEjczbzSj4MGugvmmZzKEl5mXXGQ"
+request_link = f"https://newsapi.org/v2/top-headlines?country={country_code}&apiKey={news_api}"
 
-api = "5230528864:AAE0oT9CEjczbzSj4MGugvmmZzKEl5mXXGQ"
-group = "testananta"
+#request URL
+news_response = requests.get(request_link)
 
 
-# print(today)
-# print(today)
-request_link = f"https://newsapi.org/v2/top-headlines?country={country_code}&apiKey=9b34898258214cc7be306cabdfbed128"
-# header = {"User-Agent": "Chrome/84.0.4147.105 Safari/537.36"}
-# print(request_link)
-# response = requests.get(request_link, headers=header)
-response = requests.get(request_link)
-
-jsonFile = response.json()
+newsJson = news_response.json()
 message = ""
 # print(jsonFile)
-for article in jsonFile["articles"]:
+for article in newsJson["articles"]:
     # print(article["title"])
     message += article["title"]
 
@@ -35,6 +28,7 @@ for article in jsonFile["articles"]:
 telegram_api_url = (
     f"https://api.telegram.org/bot{api}/sendMessage?chat_id=@{group}&text={message}"
 )
+# https://api.telegram.org/bot5230528864:AAE0oT9CEjczbzSj4MGugvmmZzKEl5mXXGQ/sendMessage?chat_id=@testananta&text=xyz
 response = requests.get(telegram_api_url)
 
 # print(response.status_code)
@@ -43,10 +37,3 @@ if response.status_code == 200:
 else:
     print("failed")
 
-
-# for centn in jsonFile["centers"]:
-#     # print(centn)
-#     for sess in centn["sessions"]:
-#         # print(sess)
-#         # sess_date = sess["date"]
-#         print(sess["date"], sess["vaccine"])
