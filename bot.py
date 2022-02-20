@@ -12,7 +12,7 @@ telegram_api = environ["telegram_bot_api"]
 message = ""
 time_interval = 3
 global latest_update_id
-latest_update_id = 951159815
+latest_update_id = 951159828
 
 # test it again
 global news_heads
