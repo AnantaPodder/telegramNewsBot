@@ -108,6 +108,8 @@ def send_msg_on_telegram(msg):
         print("Could not send Message")
 
 
+# changed
+
 get_availability_18()
 
 if __name__ == "main":
