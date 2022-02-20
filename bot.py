@@ -1,55 +1,33 @@
+###VERSION 1.0 for single user in a group everything predefined.
+
+
 ##### IMPORTS #####
-from hamcrest import contains
 import requests
 import time
+from os import environ
 
 ###### CONSTANTS ######
-telegram_group = "testananta"
-telegram_api = "5230528864:AAE0oT9CEjczbzSj4MGugvmmZzKEl5mXXGQ"
+telegram_group = environ["telegram_group"]
+telegram_api = environ["telegram_bot_api"]
 message = ""
 time_interval = 3
 global latest_update_id
 latest_update_id = 951159815
 
 global news_heads
-news_heads = ["xyz"]
+news_heads = ["xyz"]  # array to avoid duplicate news
+
 
 global news_api
-news_api = "9b34898258214cc7be306cabdfbed128"
-# telegram_api_url = (
-#     f"https://api.telegram.org/bot{api}/sendMessage?chat_id=@{group}&text={message}"
-# )
-# https://api.telegram.org/bot5230528864:AAE0oT9CEjczbzSj4MGugvmmZzKEl5mXXGQ/sendMessage?chat_id=@testananta&text=xyz
-
-# response = requests.get(telegram_api_url)
-
-# print(response.status_code)
-# if response.status_code == 200:
-#     print("Success")
-# else:
-#     print("failed")
-
-
-# https://api.telegram.org/bot5230528864:AAE0oT9CEjczbzSj4MGugvmmZzKEl5mXXGQ/getUpdates
-# telegram_update_json = requests.get(
-#     "https://api.telegram.org/bot5230528864:AAE0oT9CEjczbzSj4MGugvmmZzKEl5mXXGQ/getUpdates"
-# ).json()
-
-# for updateId in telegram_update_json["result"]:
-
-#     if updateId["update_id"] > latest_update_id:
-#         latest_update_id = updateId["update_id"]
-
-
-#     else:
-#         continue
-# if True:
+news_api = (
+    "9b34898258214cc7be306cabdfbed128"  # newsapi.org api to request for news updates.
+)
 
 
 def checkForNewMessage():
     global latest_update_id
     telegram_update_json = requests.get(
-        "https://api.telegram.org/bot5230528864:AAE0oT9CEjczbzSj4MGugvmmZzKEl5mXXGQ/getUpdates"
+        f"https://api.telegram.org/bot{telegram_api}/getUpdates"
     ).json()
 
     for updateId in telegram_update_json["result"]:
