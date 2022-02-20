@@ -10,12 +10,14 @@ news_keyword = "india"
 country_code = "in"
 telegram_group = "testananta"
 telegram_api = "5230528864:AAE0oT9CEjczbzSj4MGugvmmZzKEl5mXXGQ"
-request_link = f"https://newsapi.org/v2/top-headlines?country={country_code}&apiKey={news_api}"
+request_link = (
+    f"https://newsapi.org/v2/top-headlines?country={country_code}&apiKey={news_api}"
+)
 
-#request URL
+# request URL
 news_response = requests.get(request_link)
 
-
+# changed
 newsJson = news_response.json()
 message = ""
 # print(jsonFile)
@@ -36,4 +38,3 @@ if response.status_code == 200:
     print("Success")
 else:
     print("failed")
-
