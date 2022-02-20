@@ -14,6 +14,7 @@ time_interval = 3
 global latest_update_id
 latest_update_id = 951159815
 
+# test it again
 global news_heads
 news_heads = ["xyz"]  # array to avoid duplicate news
 
